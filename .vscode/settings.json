@@ -1,9 +1,0 @@
-{
-  "markdown-pdf.format": "Letter",
-  "markdown-pdf.styles": [
-    "~/Documents/GitHub/markdown-pdf-styles/styles/font-sans.css",
-    "~/Documents/GitHub/markdown-pdf-styles/styles/text-small.css",
-  ],
-  "markdown-pdf.headerTemplate": "<div style='font-size: 7pt; margin-left: 1cm;'> <span>CS525 - Hendra Wijaya (A20529195)</span> </div> <div style='margin-left: auto; margin-right: 1cm;'> <img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEQAAAAKCAYAAAANQfiuAAAACXBIWXMAAAsSAAALEgHS3X78AAABzUlEQVRIie1V0W3CMBB9VP0vE1hMYNgAvEGYoGQDmAAyAXSC0AmaDZxOUJoJokyQTtDq0HN7WBD4Sb94UhT7crbvnt9dcMcpBjLzxm4ArAFkAKYAZq6pBtrTG/sNoHRN5ZRtJi+uA/dYuabaxWu8sVsAS/q19NsHHwBzAG9ytvJ5cU21UXvFKDmfRXaJpwCQA5jQdgDgGIPE6VxTlTp3OeuhB4GsvbEjbfDGLhhIDWBHcx75LZhYwYRa+uskA/E1x69nvmckaksyCj4TEtSJxx4IGTKYubKN+RZVFN5YkKBJtA5UhSS00Zsqpcht1mr+rL8HeGM9/eb4q4Kr6IMQQeKNTdQ8JN7y/RXZodTgvbE1JS4yPtxyIAk4QpV1rWyBwEDM1hsr8ZyouY+SCbK+Kk8N6ScAUtUXEvanf0UfCpGEnlQDhbqpYeQb335BYuQmPyIFdUI3e4Xf886UzCpqqkdcJCTaICQ0umCPkfGGgxzf2TRFplOOTwjxxuYstX04S5XYVURxlXxm3tg32hI218+uvboUslbjIONRZM9wBq6pWm9sGiTP3+uYqlky0dQ1Vc0GCwaaKGUJ2atbCYniAtfm3DPkkEbKvaMTAH4AFEq7mpO1Vd8AAAAASUVORK5CYII='> </div>",
-  "markdown-pdf.footerTemplate": "<div style='font-size: 7pt; margin-left: 1cm;'> <span>Demo 2</span> </div> <div style='font-size: 7pt; margin-left: auto; margin-right: 1cm;'> <span class='pageNumber'></span> / <span class='totalPages'></span> </div>",
-}
