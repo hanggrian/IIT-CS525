@@ -1,9 +1,10 @@
 #include "dberror.h"
 #include "storage_mgr.h"
 #include "test_helpers.h"
-#include <iostream>
+
+#include <stdio.h>
 
 int main() {
-  std::cout << "Hello, World!" << std::endl;
+  printf("Hello, World!");
   return 0;
 }

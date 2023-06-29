@@ -3,4 +3,4 @@
 ## Building
 
 - *JetBrains CLion*
-- C++20
+- C99

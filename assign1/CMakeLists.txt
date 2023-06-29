@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.17)
-project(assign1)
+project(assign1 C)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_C_STANDARD 99)
 
 add_executable(assign1
-  storage_mgr.cpp storage_mgr.h
-  dberror.cpp dberror.h
-  test_assign1_1.cpp test_helpers.h)
+  storage_mgr.c storage_mgr.h
+  dberror.c dberror.h
+  test_assign1_1.c test_helpers.h)
