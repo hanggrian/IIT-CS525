@@ -6,31 +6,23 @@
 
 char *RC_message;
 
-/* print a message to standard out describing the error */
-void 
-printError (RC error)
-{
-	if (RC_message != NULL)
-		printf("EC (%i), \"%s\"\n", error, RC_message);
-	else
-		printf("EC (%i)\n", error);
+// Print a message to standard out describing the code.
+void printError(RC code) {
+  if (RC_message != NULL) {
+    printf("EC (%i), \"%s\"\n", code, RC_message);
+  } else {
+    printf("EC (%i)\n", code);
+  }
 }
 
-char *
-errorMessage (RC error)
-{
-	char *message;
-
-	if (RC_message != NULL)
-	{
-		message = (char *) malloc(strlen(RC_message) + 30);
-		sprintf(message, "EC (%i), \"%s\"\n", error, RC_message);
-	}
-	else
-	{
-		message = (char *) malloc(30);
-		sprintf(message, "EC (%i)\n", error);
-	}
-
-	return message;
+char *errorMessage(RC code) {
+  char *message;
+  if (RC_message != NULL) {
+    message = (char *) malloc(strlen(RC_message) + 30);
+    sprintf(message, "EC (%i), \"%s\"\n", code, RC_message);
+  } else {
+    message = (char *) malloc(30);
+    sprintf(message, "EC (%i)\n", code);
+  }
+  return message;
 }
