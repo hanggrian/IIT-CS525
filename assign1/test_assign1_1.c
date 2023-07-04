@@ -127,4 +127,19 @@ testMultiplePageContent(void)
   for (i=0; i < PAGE_SIZE; i++)
     ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
   printf("new block was empty\n");
+
+  //read previous page
+  TEST_CHECK(readPreviousBlock(&fh, ph));
+  for (i=0; i < PAGE_SIZE; i++)
+    ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
+  printf("previous block was empty\n");
+
+  //confirm total number of pages increased
+  TEST_CHECK(ensureCapacity(2, &fh))
+  printf("Confirmed total number of pages is 2\n");
+  
+  // destroy new page file
+  TEST_CHECK(destroyPageFile (TESTPF));  
+  
+  TEST_DONE();
 }
