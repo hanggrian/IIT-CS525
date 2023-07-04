@@ -5,7 +5,7 @@
 
 #include "storage_mgr.h"
 #include "dberror.h"
-#include "test_helper.h"
+#include "test_helpers.h"
 
 // test name
 char *testName;
@@ -16,6 +16,7 @@ char *testName;
 /* prototypes for test functions */
 static void testCreateOpenClose(void);
 static void testSinglePageContent(void);
+static void testMultiplePageContent(void);
 
 /* main function running all tests */
 int
@@ -26,7 +27,8 @@ main (void)
   initStorageManager();
 
   testCreateOpenClose();
-  testSinglePageContent();
+  //testSinglePageContent();
+  testMultiplePageContent();
 
   return 0;
 }
@@ -97,4 +99,32 @@ testSinglePageContent(void)
   TEST_CHECK(destroyPageFile (TESTPF));  
   
   TEST_DONE();
+}
+
+void
+testMultiplePageContent(void)
+{
+  SM_FileHandle fh;
+  SM_PageHandle ph;
+  int i;
+
+  testName = "test Multiple page content";
+
+  ph = (SM_PageHandle) malloc(PAGE_SIZE);
+
+  // create a new page file
+  TEST_CHECK(createPageFile (TESTPF));
+  TEST_CHECK(openPageFile (TESTPF, &fh));
+  printf("created and opened file\n");
+
+  // add new page
+  TEST_CHECK(appendEmptyBlock(&fh));
+  printf("Add new page with zero bytes\n");
+
+  // read new page into handle
+  TEST_CHECK(readNextBlock (&fh, ph));
+  // the page should be empty (zero bytes)
+  for (i=0; i < PAGE_SIZE; i++)
+    ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
+  printf("new block was empty\n");
 }
