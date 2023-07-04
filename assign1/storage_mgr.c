@@ -100,8 +100,7 @@ RC readBlock(int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
   if (fHandle == NULL) {
     return RC_FILE_HANDLE_NOT_INIT;
   }
-  printf("Page Num %d", pageNum);
-  printf("\n");
+
   //printf("Total number of Pages %d/n", fHandle->totalNumPages);
   // Since the `pageNum` starts with 0, so the valid range of `pageNum` should
   // be range of `totalNumPages`.
@@ -125,7 +124,6 @@ RC readBlock(int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
   }
 
   fread(memPage, sizeof(char), PAGE_SIZE, fp);
-
   fHandle->curPagePos = pageNum;
   fclose(fp);
   return RC_OK;
@@ -253,11 +251,9 @@ RC appendEmptyBlock(SM_FileHandle *fHandle) {
     return RC_READ_NON_EXISTING_PAGE;
   }
 
-  char *str = (char *) malloc(PAGE_SIZE * sizeof(char));
+  char *str = (char *) calloc(PAGE_SIZE, sizeof(char));
   fwrite(str, sizeof(char), PAGE_SIZE, fp);
   fHandle->totalNumPages++;
-  printf("Current position:%d/n", fHandle->curPagePos);//=fHandle->totalNumPages-2
-  fclose(fp);
   free(str);
   return RC_OK;
 }
@@ -272,12 +268,9 @@ RC ensureCapacity(int numberOfPages, SM_FileHandle *fHandle) {
     return RC_READ_NON_EXISTING_PAGE;
   }
 
-  int currentNumPages = fHandle->totalNumPages;
-  int cnt = numberOfPages - currentNumPages;
-  if (cnt > 0) {
-    for (int i = 0; i < cnt; i++) {
-      appendEmptyBlock(fHandle);
-    }
+  int cnt = numberOfPages - fHandle->totalNumPages;
+  for (int i = 0; i < cnt; i++) {
+    appendEmptyBlock(fHandle);
   }
 
   if (fHandle->totalNumPages != numberOfPages) {

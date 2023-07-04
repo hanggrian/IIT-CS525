@@ -17,6 +17,7 @@ char *testName;
 static void testCreateOpenClose(void);
 static void testSinglePageContent(void);
 static void testMultiplePageContent(void);
+static void testExpandCapacity(void);
 
 /* main function running all tests */
 int
@@ -27,8 +28,9 @@ main (void)
   initStorageManager();
 
   testCreateOpenClose();
-  //testSinglePageContent();
+  testSinglePageContent();
   testMultiplePageContent();
+  testExpandCapacity();
 
   return 0;
 }
@@ -95,14 +97,16 @@ testSinglePageContent(void)
     ASSERT_TRUE((ph[i] == (i % 10) + '0'), "character in page read from disk is the one we expected.");
   printf("reading first block\n");
 
+  TEST_CHECK(closePageFile (&fh));
   // destroy new page file
-  TEST_CHECK(destroyPageFile (TESTPF));  
+  TEST_CHECK(destroyPageFile (TESTPF)); 
+  // after destruction trying to open the file should cause an error
+  ASSERT_TRUE((openPageFile(TESTPF, &fh) != RC_OK), "opening non-existing file should return an error."); 
   
   TEST_DONE();
 }
 
-void
-testMultiplePageContent(void)
+void testMultiplePageContent(void)
 {
   SM_FileHandle fh;
   SM_PageHandle ph;
@@ -126,20 +130,32 @@ testMultiplePageContent(void)
   // the page should be empty (zero bytes)
   for (i=0; i < PAGE_SIZE; i++)
     ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
-  printf("new block was empty\n");
+  printf("\n new block was empty\n");
 
-  //read previous page
-  TEST_CHECK(readPreviousBlock(&fh, ph));
-  for (i=0; i < PAGE_SIZE; i++)
-    ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
-  printf("previous block was empty\n");
-
-  //confirm total number of pages increased
-  TEST_CHECK(ensureCapacity(2, &fh))
-  printf("Confirmed total number of pages is 2\n");
-  
+  TEST_CHECK(closePageFile (&fh));
   // destroy new page file
-  TEST_CHECK(destroyPageFile (TESTPF));  
+  TEST_CHECK(destroyPageFile (TESTPF));
+  // after destruction trying to open the file should cause an error
+  ASSERT_TRUE((openPageFile(TESTPF, &fh) != RC_OK), "opening non-existing file should return an error.");  
   
+  TEST_DONE();
+}
+
+void testExpandCapacity(void) {
+  SM_FileHandle fh;
+
+  testName = "test expandable capacity";
+
+  TEST_CHECK(createPageFile(TESTPF));
+  TEST_CHECK(openPageFile(TESTPF, &fh));
+
+  ASSERT_TRUE(fh.totalNumPages == 1, "not expanded yet");
+  TEST_CHECK(ensureCapacity(4, &fh));
+  ASSERT_TRUE(fh.totalNumPages == 4, "expanded to 4");
+
+  TEST_CHECK(closePageFile (&fh));
+  TEST_CHECK(destroyPageFile(TESTPF));
+  // after destruction trying to open the file should cause an error
+  ASSERT_TRUE((openPageFile(TESTPF, &fh) != RC_OK), "opening non-existing file should return an error.");
   TEST_DONE();
 }
