@@ -25,7 +25,7 @@ RC createPageFile(char *fileName) {
     return RC_FILE_NOT_FOUND;
   }
 
-  char *str = (char *) malloc(PAGE_SIZE * sizeof(char));
+  char *str = (char *) calloc(PAGE_SIZE, sizeof(char));
   if (fwrite(str, sizeof(char), PAGE_SIZE, fp) < PAGE_SIZE) {
     fclose(fp);
     return RC_WRITE_FAILED;
