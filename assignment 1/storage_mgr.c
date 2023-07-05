@@ -17,7 +17,6 @@ void initStorageManager(void) {
 	printf("The program begins to initialize storage manager.\n ");
 }
 
-
 /**
  * Define implementation of createPageFile. 
  * The createPageFile function is to create a new page file with one page size.
@@ -41,13 +40,11 @@ RC createPageFile(char *fileName)
 	}
 
 	/* allocates the PAGE_SIZE memory and assigns the value to str pointer */
-	char *str = (char*)malloc(PAGE_SIZE * sizeof(char)); 
+	// char *str = (char*)malloc(PAGE_SIZE * sizeof(char));
+	char *str = (char*)calloc(PAGE_SIZE, sizeof(char));  
 
 	/* writes data from the array pointer to, by str to the fp */
-	if (fwrite(str, sizeof(char), PAGE_SIZE, fp) < PAGE_SIZE) {
-		fclose(fp);
-		return RC_WRITE_FAILED;
-	}
+	fwrite(str, sizeof(char), PAGE_SIZE, fp);
 
 	/* closes the file, and flushes buffers */	
 	fclose(fp);	
@@ -78,7 +75,7 @@ RC openPageFile (char *fileName, SM_FileHandle *fHandle) {
 	}
 
 	/* Opens the exsiting file */
-	FILE *fp = fopen(fileName, "r");
+	FILE *fp = fopen(fileName, "r+");
 	
 	/* checking if the file opening was unsuccessful*/
 	if (fp == NULL) {
@@ -181,7 +178,7 @@ RC readBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	}
 
 	/* get the file pointer */
-	FILE *fp = fopen(fHandle->fileName, "r");
+	FILE *fp = fHandle->mgmtInfo;
 
 	/* if fp is null, return an error indicating that file not found */
 	if (fp == NULL) {
@@ -210,7 +207,7 @@ RC readBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	fHandle->curPagePos = pageNum;
 
 	/* close the file */
-	fclose(fp);
+	// fclose(fp);
 
 	/* the read block operation was successfully */
 	return RC_OK;
@@ -337,17 +334,19 @@ RC writeBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	if (pageNum < 0 || pageNum >= fHandle->totalNumPages) {
 		return RC_READ_NON_EXISTING_PAGE;
 	}
+	
 	/* get the current file pointer */
-	FILE *fp = fopen(fHandle->fileName, "w+");
+	// FILE *fp = fopen(fHandle->fileName, "w+");
+	FILE *fp = fHandle->mgmtInfo;
 
 	/* if the file pointer not found, return file not found */
 	if (fp == NULL) {
 		return RC_FILE_NOT_FOUND;
 	}
-
 	/* the file was found successfully */
 	/* move the current fp to the current page of the file */
 	int offset = pageNum * PAGE_SIZE;
+
 	if(fseek(fp, offset, SEEK_SET) != 0) {
 		return RC_READ_NON_EXISTING_PAGE;
 	}
@@ -358,7 +357,7 @@ RC writeBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	}
 
 	/* write data from memory to dish */
-	if(fwrite(memPage, sizeof(char), strlen(memPage), fp) == -1 ) {
+	if(fwrite(memPage, sizeof(char), strlen(memPage), fp) < PAGE_SIZE) {
 		return RC_WRITE_FAILED;
 	}
 
@@ -366,7 +365,7 @@ RC writeBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	fHandle->curPagePos = pageNum;
 
 	/* close fp to flush */
-	fclose(fp);
+	// fclose(fp);
 
 	return RC_OK;
 
@@ -418,7 +417,7 @@ RC appendEmptyBlock (SM_FileHandle *fHandle) {
 	/* after the file point moves to the end of the file, append empty block to this file*/
 
 	/* allocates the PAGE_SIZE memory and assigns the value to str pointer */
-	char *str = (char*)malloc(PAGE_SIZE * sizeof(char)); 
+	char *str = (char*)calloc(PAGE_SIZE, sizeof(char)); 
 
 	/* writes data from the array pointer to, by str to the fp */
 	if (fwrite(str, sizeof(char), PAGE_SIZE, fp) < PAGE_SIZE) {
@@ -432,7 +431,7 @@ RC appendEmptyBlock (SM_FileHandle *fHandle) {
 	fHandle->totalNumPages++;
 	
 	/* closes the file, and flushes buffers */	
-	fclose(fp);	
+	// fclose(fp);	
 
 	/* deallocates the memory allocated by the malloc */	
 	free(str);
