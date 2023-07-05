@@ -61,7 +61,7 @@ testCreateOpenClose(void)
   TEST_DONE();
 }
 
-/* Try to create, open, and close a page file */
+/* Try to create, open, read, write and close a page file */
 void
 testSinglePageContent(void)
 {
@@ -71,7 +71,7 @@ testSinglePageContent(void)
 
   testName = "test single page content";
 
-  ph = (SM_PageHandle) malloc(PAGE_SIZE);
+  ph = (SM_PageHandle) calloc(PAGE_SIZE, sizeof(char));
 
   // create a new page file
   TEST_CHECK(createPageFile (TESTPF));
@@ -106,6 +106,7 @@ testSinglePageContent(void)
   TEST_DONE();
 }
 
+/*Try to create and open a file, add a page to the file and read it*/
 void testMultiplePageContent(void)
 {
   SM_FileHandle fh;
@@ -114,20 +115,19 @@ void testMultiplePageContent(void)
 
   testName = "test Multiple page content";
 
-  ph = (SM_PageHandle) malloc(PAGE_SIZE);
+  ph = (SM_PageHandle) calloc(PAGE_SIZE, sizeof(char));
 
   // create a new page file
   TEST_CHECK(createPageFile (TESTPF));
   TEST_CHECK(openPageFile (TESTPF, &fh));
   printf("created and opened file\n");
 
-  // add new page
+  // add new page to file
   TEST_CHECK(appendEmptyBlock(&fh));
   printf("Add new page with zero bytes\n");
 
   // read new page into handle
   TEST_CHECK(readNextBlock (&fh, ph));
-  // the page should be empty (zero bytes)
   for (i=0; i < PAGE_SIZE; i++)
     ASSERT_TRUE((ph[i] == 0), "expected zero byte in new page of freshly initialized page");
   printf("\n new block was empty\n");
@@ -141,6 +141,7 @@ void testMultiplePageContent(void)
   TEST_DONE();
 }
 
+/* Try to increase capacity on a file by a certain number of pages*/
 void testExpandCapacity(void) {
   SM_FileHandle fh;
 
