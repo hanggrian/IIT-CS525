@@ -6,4 +6,4 @@ set(CMAKE_C_STANDARD 99)
 add_executable(assign1
   storage_mgr.c storage_mgr.h
   dberror.c dberror.h
-  test_assign1_1.c test_helpers.h)
+  test_assign1_1.c test_helper.h)

@@ -8,3 +8,7 @@ Summer 2023.
 - [Content](https://github.com/hendraanggrian/IIT-CS525/tree/assets/)
 - [Assignments](assignments/)
 - [Schedule](.class.ics)
+
+## Resources
+
+- [IIT Fourier](http://cs.iit.edu/~glavic/cs425/13fall/files/fourier_oracle_instructions.pdf)
