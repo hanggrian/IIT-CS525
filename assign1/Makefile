@@ -8,3 +8,7 @@ OBJ = dberror.o storage_mgr.o test_assign1_1.o
 
 test_assign1: $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
+	
+.PHONY : clean
+clean :
+	$(RM) *.o test_assign1 -r
