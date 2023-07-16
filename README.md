@@ -9,6 +9,12 @@ Summer 2023.
 - [Assignments](assignments/)
 - [Schedule](.class.ics)
 
+## Prerequisite
+
+- [Relational algebra](https://github.com/hendraanggrian/IIT-CS425/blob/main/relational_algebra.md)
+- [MySQL Basics](https://github.com/hendraanggrian/IIT-CS425/blob/main/mysql_basics.md)
+- [MySQL Database](https://github.com/hendraanggrian/IIT-CS425/blob/main/mysql_database.md)
+
 ## Resources
 
 - [IIT Fourier](http://cs.iit.edu/~glavic/cs425/13fall/files/fourier_oracle_instructions.pdf)
