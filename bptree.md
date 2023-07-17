@@ -1,4 +1,4 @@
-# [B<sup>+</sup>-Tree](https://www.programiz.com/dsa/b-plus-tree/)
+# [B+ Tree](https://www.programiz.com/dsa/b-plus-tree/)
 
 A B+ tree is an advanced form of a self-balancing tree in which all the values
 are present in the leaf level.
@@ -7,9 +7,9 @@ An important concept to be understood before learning B+ tree is multilevel
 indexing. In multilevel indexing, the index of indices is created as in figure
 below. It makes accessing the data easier and faster.
 
-![](https://cdn.programiz.com/sites/tutorial2program/files/multilevel-indexing.png)<br><small>Multilevel Indexing using B<sup>+</sup>-Tree</small>
+![](https://cdn.programiz.com/sites/tutorial2program/files/multilevel-indexing.png)<br><small>Multilevel Indexing using B+ Tree</small>
 
-## Properties of a B<sup>+</sup>-Tree
+## Properties of a B+ Tree
 
 - All leaves are at the same level.
 - The root has at least two children.
@@ -18,11 +18,11 @@ below. It makes accessing the data easier and faster.
 - Each node can contain a maximum of `m-1` keys and a minimum of `⌈m/2⌉ - 1`
   keys.
 
-## Comparison between a *B-tree* and a *B<sup>+</sup>-Tree*
+## Comparison between a *B-tree* and a *B+ Tree*
 
-![](https://cdn.programiz.com/sites/tutorial2program/files/B-tree.png)<br><small>B-Tree</small>
+![](https://cdn.programiz.com/sites/tutorial2program/files/B-tree.png)<br><small>B-tree</small>
 
-![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree.png)<br><small>B<sup>+</sup>-Tree</small>
+![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree.png)<br><small>B+ Tree</small>
 
 The data pointers are present only at the leaf nodes on a B+ tree whereas the
 data pointers are present in the internal, leaf or root nodes on a B-tree.
@@ -32,7 +32,7 @@ connected on a B+ tree.
 
 Operations on a B+ tree are faster than on a B-tree.
 
-## Searching on a B<sup>+</sup>-Tree
+## Searching on a B+ Tree
 
 The following steps are followed to search for data in a B+ Tree of order `m`.
 Let the data to be searched be `k`.
@@ -47,7 +47,7 @@ Let the data to be searched be `k`.
 
 If `k` exists in the leaf node, return true else return false.
 
-## Searching Example on a B<sup>+</sup>-Tree
+## Searching Example on a B+ Tree
 
 Let us search `k = 45` on the following B+ tree.
 
@@ -664,7 +664,7 @@ is `Θ(logt n)`.
 
 If binary search is used, then total complexity is `Θ(log2t.logt n)`.
 
-## B<sup>+</sup>-Tree applications
+## B+ Tree applications
 
 - Multilevel indexing.
 - Faster operations on the tree (insertion, deletion, search).

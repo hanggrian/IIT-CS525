@@ -1,6 +1,6 @@
-# B<sup>+</sup>-Tree operations
+# B+ Tree insertion & deletion
 
-## [Insertion on a B<sup>+</sup>-Tree](https://www.programiz.com/dsa/insertion-on-a-b-plus-tree/)
+## [Insertion on a B+ Tree](https://www.programiz.com/dsa/insertion-on-a-b-plus-tree/)
 
 Inserting an element into a B+ tree consists of three main events:
 **searching the appropriate leaf**, **inserting** the element and
@@ -64,7 +64,7 @@ The elements to be inserted are 5, 15, 25, 35, 45.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/insert-5-b+tree.png)<br><small>Insert 45</small>
 
-## [Deletion on a B<sup>+</sup>-Tree](https://www.programiz.com/dsa/deletion-from-a-b-plus-tree/)
+## [Deletion on a B+ Tree](https://www.programiz.com/dsa/deletion-from-a-b-plus-tree/)
 
 Deleting an element on a B+ tree consists of three main events: **searching**
 the node where the key to be deleted exists, deleting the key and balancing the
