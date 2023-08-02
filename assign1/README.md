@@ -1,4 +1,4 @@
-## Storage Manager 
+# Storage Manager
 
 In this assignment, we implemented a simple storage manager that is capable of reading blocks from a file on disk into memory and writing blocks from memory to a file on disk. Basically, we implemented all interfaces described in `storage_mgr.h`
 
@@ -11,9 +11,9 @@ In this assignment, we implemented a simple storage manager that is capable of r
 | `test_assign1.c` | Contains main function running all tests.              |
 | `test_helper.h`  | Testing and assertion tools.                           |
 
-## Execution Environment 
+## Execution Environment
 
-Before running the whole project, please ensure that your environment has successfully installed `make` and `gcc`. Here is an example. 
+Before running the whole project, please ensure that your environment has successfully installed `make` and `gcc`. Here is an example.
 
 ```shell
 make --version
@@ -39,28 +39,28 @@ This is free software; see the source for copying conditions.  There is NO
 
 ## Hierarchy
 
-![img](https://raw.githubusercontent.com/hendraanggrian/IIT-CS525/assets/assign1/hierarchy.png)
+![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign1/hierarchy.png)
 
 ## Implementation of interfaces
 
-Here we describe the implementation of every interface listed in `storage mgr.h`  
+Here we describe the implementation of every interface listed in `storage mgr.h`
 
-### 1. manipulating page files  
+### 1. manipulating page files
 
 ```c
 RC createPageFile(char *fileName)
-    
+
 {
 	/* check the validation of fileName */
 	if (fileName == NULL) {
 		return RC_FILE_NOT_FOUND;
 	}
-	
+
 	/* creates the filename pointed to by filename */
 	FILE *fp = fopen(fileName, "w+");
 
 	/* checking if the file opening was unsuccessful */
-	if (fp == NULL) 
+	if (fp == NULL)
 	{
 		/* if yes, return an error showing file not found */
 		return RC_FILE_NOT_FOUND;
@@ -68,19 +68,19 @@ RC createPageFile(char *fileName)
 
 	/* allocates the PAGE_SIZE memory and assigns the value to str pointer */
 	// char *str = (char*)malloc(PAGE_SIZE * sizeof(char));
-	char *str = (char*)calloc(PAGE_SIZE, sizeof(char));  
+	char *str = (char*)calloc(PAGE_SIZE, sizeof(char));
 
 	/* writes data from the array pointer to, by str to the fp */
 	fwrite(str, sizeof(char), PAGE_SIZE, fp);
 
-	/* closes the file, and flushes buffers */	
-	fclose(fp);	
+	/* closes the file, and flushes buffers */
+	fclose(fp);
 
-	/* deallocates the memory allocated by the malloc */	
+	/* deallocates the memory allocated by the malloc */
 	free(str);
 
 	/* return ok to indicate all operations success in this function */
-	return RC_OK;	
+	return RC_OK;
 }
 ```
 
@@ -98,7 +98,7 @@ RC openPageFile (char *fileName, SM_FileHandle *fHandle) {
 
 	/* Opens the exsiting file */
 	FILE *fp = fopen(fileName, "r+");
-	
+
 	/* checking if the file opening was unsuccessful*/
 	if (fp == NULL) {
 		/* if yes, return an error indicating that file not found */
@@ -143,8 +143,8 @@ RC closePageFile (SM_FileHandle *fHandle) {
 	/* get the file pointer through fHandle */
 	FILE *fp = fHandle->mgmtInfo;
 
-	/* close the file, all buffers are flushed */	
-	fclose(fp);	
+	/* close the file, all buffers are flushed */
+	fclose(fp);
 
 	/* set fp to null */
 	if (fp != NULL) {
@@ -203,7 +203,7 @@ RC readBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	/* check the current value of the position indicator, if not zero, errors happened in this process */
 	if (fseek(fp, offset, SEEK_SET) != 0) {
 		return RC_READ_NON_EXISTING_PAGE;
-	} 
+	}
 
 	/* before read data to memory page, check the validation of the memory page */
 	if (memPage == NULL) {
@@ -214,7 +214,7 @@ RC readBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	if (fread(memPage, sizeof(char), PAGE_SIZE, fp) < PAGE_SIZE) {
 		return RC_READ_NON_EXISTING_PAGE;
 	}
-	
+
 	/* update current file page position */
 	fHandle->curPagePos = pageNum;
 
@@ -314,12 +314,12 @@ RC writeBlock (int pageNum, SM_FileHandle *fHandle, SM_PageHandle memPage) {
 	if (fHandle == NULL) {
 		return RC_FILE_HANDLE_NOT_INIT;
 	}
-	
+
 	/* check the validation of pageNum */
 	if (pageNum < 0 || pageNum >= fHandle->totalNumPages) {
 		return RC_READ_NON_EXISTING_PAGE;
 	}
-	
+
 	/* get the current file pointer */
 	// FILE *fp = fopen(fHandle->fileName, "w+");
 	FILE *fp = fHandle->mgmtInfo;
@@ -378,7 +378,7 @@ RC appendEmptyBlock (SM_FileHandle *fHandle) {
 	FILE *fp = fHandle->mgmtInfo;
 
 	/* checking if the file opening was unsuccessful */
-	if (fp == NULL) 
+	if (fp == NULL)
 	{
 		/* if yes, return an error showing file not found */
 		return RC_FILE_NOT_FOUND;
@@ -392,7 +392,7 @@ RC appendEmptyBlock (SM_FileHandle *fHandle) {
 	/* after the file point moves to the end of the file, append empty block to this file*/
 
 	/* allocates the PAGE_SIZE memory and assigns the value to str pointer */
-	char *str = (char*)calloc(PAGE_SIZE, sizeof(char)); 
+	char *str = (char*)calloc(PAGE_SIZE, sizeof(char));
 
 	/* writes data from the array pointer to, by str to the fp */
 	if (fwrite(str, sizeof(char), PAGE_SIZE, fp) < PAGE_SIZE) {
@@ -403,15 +403,15 @@ RC appendEmptyBlock (SM_FileHandle *fHandle) {
 	/* if write succesfully */
 	/* plus 1 to total number of pages */
 	fHandle->totalNumPages++;
-	
-	/* closes the file, and flushes buffers */	
-	// fclose(fp);	
 
-	/* deallocates the memory allocated by the malloc */	
+	/* closes the file, and flushes buffers */
+	// fclose(fp);
+
+	/* deallocates the memory allocated by the malloc */
 	free(str);
 
 	/* return ok to indicate all operations success in this function */
-	return RC_OK;	
+	return RC_OK;
 }
 ```
 
@@ -422,7 +422,7 @@ RC ensureCapacity (int numberOfPages, SM_FileHandle *fHandle) {
 		return RC_FILE_HANDLE_NOT_INIT;
 	}
 
-	/* check the validation of number of pages */ 
+	/* check the validation of number of pages */
 	if (numberOfPages < 1) {
 		return RC_READ_NON_EXISTING_PAGE;
 	}
@@ -445,14 +445,14 @@ RC ensureCapacity (int numberOfPages, SM_FileHandle *fHandle) {
 		return RC_WRITE_FAILED;
 	}
 
-	/* return ok to indicate all operations success in this function */ 
+	/* return ok to indicate all operations success in this function */
 	return RC_OK;
 }
 ```
 
 ## Extra Testcases
 
-We had added two testcases `static void testMultiplePageContent(void)` and `static void testExpandCapacity(void)` to test what happened when there are multiple page and when the system need to expand capacity. 
+We had added two testcases `static void testMultiplePageContent(void)` and `static void testExpandCapacity(void)` to test what happened when there are multiple page and when the system need to expand capacity.
 
 ```c
 // Test multiple page content.
@@ -513,6 +513,6 @@ void testExpandCapacity(void) {
 
 ## Contributing
 
-The `assign1` had been done by hwijaya@hawk.iit.edu (A20529195), jlee252@hawk.iit.edu (A20324557) and 
+The `assign1` had been done by hwijaya@hawk.iit.edu (A20529195), jlee252@hawk.iit.edu (A20324557) and
 
 xzhang143@hawk.iit.edu (A20494478). They work together to complete this task.

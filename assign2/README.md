@@ -57,9 +57,9 @@ This is free software; see the source for copying conditions.  There is NO
 
 ## Architectural Design
 
-![Architecture screenshot.](architecture.png)<br><small>Figure 1 &ndash; Architecture</small>
+![Architecture screenshot.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign2/architecture.png)
 
-![Hierarchy diagram.](https://raw.githubusercontent.com/hendraanggrian/IIT-CS525/assets/assign2/hierarchy.png)<br><small>Figure 2 &ndash; Hierarchy</small>
+![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign2/hierarchy.png)
 
 ## Design Rationale
 
