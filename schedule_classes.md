@@ -94,3 +94,7 @@ transactions may not be Cascadeless Schedule.
 ## Conflict serializibility
 
 [See extra content](https://github.com/hendraanggrian/IIT-CS525/blob/assets/ext4.pdf)
+
+## 2PL
+
+[See question & answer](https://gateoverflow.in/369645/2pl-made-easy-full-syllabus-test)

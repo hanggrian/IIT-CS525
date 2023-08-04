@@ -1,4 +1,4 @@
-# B+ Tree insertion & deletion
+# B+ Tree Insertion & Deletion
 
 ## [Insertion on a B+ Tree](https://www.programiz.com/dsa/insertion-on-a-b-plus-tree/)
 
@@ -8,7 +8,7 @@ Inserting an element into a B+ tree consists of three main events:
 
 Let us understand these events below.
 
-### Insertion operation
+### Insertion Operation
 
 Before inserting an element into a B+ tree, these properties must be kept in
 mind.
@@ -38,7 +38,7 @@ The following steps are followed for inserting an element.
 3. Add `m/2`-th key to the parent node as well.
 4. If the parent node is already full, follow steps 2 to 3.
 
-### Insertion example
+### Insertion Example
 
 Let us understand the insertion operation with the illustrations below.
 
@@ -71,7 +71,7 @@ the node where the key to be deleted exists, deleting the key and balancing the
 tree if required. **Underflow** is a situation when there is less number of keys
 in a node than the minimum number of keys it should hold.
 
-### Deletion operation
+### Deletion Operation
 
 Before going through the steps below, one must know these facts about a B+ tree
 of degree **m**.

@@ -6,12 +6,12 @@ Summer 2023.
 
 - [Syllabus](https://github.com/hendraanggrian/IIT-CS525/blob/assets/syllabus.pdf)
 - [Content](https://github.com/hendraanggrian/IIT-CS525/tree/assets/)
-- ~~Assignments~~
+- [Assignments](https://github.com/hendraanggrian/IIT-CS525/tree/main/assignments/)
 - [Schedule](.class.ics)
 
 ## Prerequisite
 
-- [Relational algebra](https://github.com/hendraanggrian/IIT-CS425/blob/main/relational_algebra.md)
+- [Relational Algebra](https://github.com/hendraanggrian/IIT-CS425/blob/main/relational_algebra.md)
 - [MySQL Basics](https://github.com/hendraanggrian/IIT-CS425/blob/main/mysql_basics.md)
 - [MySQL Database](https://github.com/hendraanggrian/IIT-CS425/blob/main/mysql_database.md)
 

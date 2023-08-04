@@ -18,7 +18,7 @@ below. It makes accessing the data easier and faster.
 - Each node can contain a maximum of `m-1` keys and a minimum of `⌈m/2⌉ - 1`
   keys.
 
-## Comparison between a *B-tree* and a *B+ Tree*
+## Comparison Between a *B-tree* and a *B+ Tree*
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B-tree.png)<br><small>B-tree</small>
 
@@ -73,7 +73,7 @@ Let us search `k = 45` on the following B+ tree.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-5.png)<br><small>k is found</small>
 
-## Java example
+## Java Example
 
 ```java
 // Searching on a B+ tree in Java
@@ -655,16 +655,16 @@ public class BPlusTree {
 }
 ```
 
-## Search complexity
+## Search Complexity
 
-### Time complexity
+### Time Complexity
 
 If linear search is implemented inside a node, then total complexity
 is `Θ(logt n)`.
 
 If binary search is used, then total complexity is `Θ(log2t.logt n)`.
 
-## B+ Tree applications
+## B+ Tree Applications
 
 - Multilevel indexing.
 - Faster operations on the tree (insertion, deletion, search).
