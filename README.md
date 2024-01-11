@@ -6,8 +6,8 @@ Summer 2023.
 
 - [Syllabus](https://github.com/hendraanggrian/IIT-CS525/blob/assets/syllabus.pdf)
 - [Content](https://github.com/hendraanggrian/IIT-CS525/tree/assets/)
-- [Assignments](https://github.com/hendraanggrian/IIT-CS525/tree/main/assignments/)
-- [Schedule](.class.ics)
+- [Assignments](assignments/)
+- [Schedule](.ical/)
 
 ## Prerequisite
 
