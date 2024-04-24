@@ -2,12 +2,12 @@
 
 ## [Recoverability-based](https://www.geeksforgeeks.org/cascadeless-in-dbms/)
 
-- **Recoverable schedule**: Transactions must be committed in order. Dirty Read
+- **Recoverable schedule:** Transactions must be committed in order. Dirty Read
   problem and Lost Update problem may occur.
-- **Cascadeless schedule**: Dirty Read not allowed, means reading the data
+- **Cascadeless schedule:** Dirty Read not allowed, means reading the data
   written by an uncommitted transaction is not allowed. Lost Update problem may
   occur.
-- **Strict schedule**: Neither Dirty read nor Lost Update problem allowed, means
+- **Strict schedule:** Neither Dirty read nor Lost Update problem allowed, means
   reading or writing the data written by an uncommitted transaction is not
   allowed.
 
@@ -49,7 +49,7 @@ transactions to rollback or abort, then such a schedule is called as a Cascading
 Rollback or Cascading Abort or Cascading Schedule. It simply leads to the
 wastage of CPU time.
 
-These Cascading Rollbacks occur because of **Dirty Read problems**.
+These Cascading Rollbacks occur because of **Dirty Read problems.**
 
 For example, transaction $T_1$ writes uncommitted $x$ that is read by
 Transaction $T_2$. Transaction $T_2$ writes uncommitted $x$ that is read by
@@ -61,7 +61,7 @@ Because of $T_1$ rollback, all $T_2$, $T_3$, and $T_4$ should also be rollback
 (Cascading dirty read problem).
 
 This phenomenon, in which a single transaction failure leads to a series of
-transaction rollbacks is called **Cascading rollback**.
+transaction rollbacks is called **Cascading rollback.**
 
 ### Cascadeless schedule
 
@@ -69,7 +69,7 @@ This schedule avoids all possible *Dirty Read Problem*.
 
 In Cascadeless Schedule, if a transaction is going to perform read operation on
 a value, it has to wait until the transaction who is performing write on that
-value commits. That means there must not be **Dirty Read**. Because Dirty Read
+value commits. That means there must not be **Dirty Read.** Because Dirty Read
 Problem can cause *Cascading Rollback*, which is inefficient.
 
 Cascadeless Schedule avoids cascading aborts/rollbacks (ACA). Schedules in which

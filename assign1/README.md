@@ -1,19 +1,23 @@
 # Storage Manager
 
-In this assignment, we implemented a simple storage manager that is capable of reading blocks from a file on disk into memory and writing blocks from memory to a file on disk. Basically, we implemented all interfaces described in `storage_mgr.h`
+In this assignment, we implemented a simple storage manager that is capable of
+reading blocks from a file on disk into memory and writing blocks from memory to
+a file on disk. Basically, we implemented all interfaces described in
+`storage_mgr.h`
 
 ## Files
 
-| File             | Description                                            |
-| ---------------- | ------------------------------------------------------ |
-| `store_mgr.*`    | Responsible for managing database in files and memory. |
-| `dberror.*`      | Keeps track and report different types of error.       |
-| `test_assign1.c` | Contains main function running all tests.              |
-| `test_helper.h`  | Testing and assertion tools.                           |
+File | Description
+--- | ---
+`store_mgr.*` | Responsible for managing database in files and memory.
+`dberror.*` | Keeps track and report different types of error.
+`test_assign1.c` | Contains main function running all tests.
+`test_helper.h` | Testing and assertion tools.
 
 ## Execution Environment
 
-Before running the whole project, please ensure that your environment has successfully installed `make` and `gcc`. Here is an example.
+Before running the whole project, please ensure that your environment has
+successfully installed `make` and `gcc`. Here is an example.
 
 ```shell
 make --version
@@ -33,13 +37,13 @@ This is free software; see the source for copying conditions.  There is NO
 
 ## Compiling and Running
 
-1. Enter into the folder containing all documents. `$ cd /assign1`
-2. Execute `$ make`
-3. See result s`$ ./test_assign1`
+1.  Enter into the folder containing all documents. `$ cd /assign1`
+1.  Execute `$ make`
+1.  See result s`$ ./test_assign1`
 
 ## Hierarchy
 
-![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign1/hierarchy.png)
+![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign1/hierarchy.svg)
 
 ## Implementation of interfaces
 
@@ -304,8 +308,6 @@ RC readCurrentBlock (SM_FileHandle *fHandle, SM_PageHandle memPage) {
 }
 ```
 
-
-
 ### 3. writing blocks to a page file
 
 ```c
@@ -452,7 +454,9 @@ RC ensureCapacity (int numberOfPages, SM_FileHandle *fHandle) {
 
 ## Extra Testcases
 
-We had added two testcases `static void testMultiplePageContent(void)` and `static void testExpandCapacity(void)` to test what happened when there are multiple page and when the system need to expand capacity.
+We had added two testcases `static void testMultiplePageContent(void)`
+and `static void testExpandCapacity(void)` to test what happened when there are
+multiple page and when the system need to expand capacity.
 
 ```c
 // Test multiple page content.
@@ -513,6 +517,7 @@ void testExpandCapacity(void) {
 
 ## Contributing
 
-The `assign1` had been done by hwijaya@hawk.iit.edu (A20529195), jlee252@hawk.iit.edu (A20324557) and
+The `assign1` had been done by hwijaya@hawk.iit.edu (A20529195),
+jlee252@hawk.iit.edu (A20324557) and
 
 xzhang143@hawk.iit.edu (A20494478). They work together to complete this task.

@@ -2,51 +2,60 @@
 
 ## Overview
 
-For this assignment, we implemented a simple record manager. The main function of the record manager is to handle tables with a fixed schema. Clients can insert records, delete records, update records, and scan through the records in a table. A scan is associated with a search condition and only returns records that match the search condition. Each table will be stored in a separate page file, and the record manager can access the pages of the file through the buffer manager.
+For this assignment, we implemented a simple record manager. The main function
+of the record manager is to handle tables with a fixed schema. Clients can
+insert records, delete records, update records, and scan through the records in
+a table. A scan is associated with a search condition and only returns records
+that match the search condition. Each table will be stored in a separate page
+file, and the record manager can access the pages of the file through the buffer
+manager.
 
-In our implementation, the record manager efficiently allocates and manages the location of data pages in the database files and records the number of free slots per page, ensuring that every page is used optimally to store records.  Additionally, the record manager tracks the usage of free space and ensures that all allocated resources are properly released when the program terminates.
+In our implementation, the record manager efficiently allocates and manages the
+location of data pages in the database files and records the number of free
+slots per page, ensuring that every page is used optimally to store records.
+Additionally, the record manager tracks the usage of free space and ensures that
+all allocated resources are properly released when the program terminates.
 
 ## Sources
 
-The following table shows all files in the `assign3 directory and explains their functionality.
+The following table shows all files in the `assign3 directory and explains their
+functionality.
 
-| File                   | Description                                                  |
-| :--------------------- | :----------------------------------------------------------- |
-| buffer_mgr.*           | Manages memory page frames and page files.                   |
-| buffer_mgr_stat.*      | Statistic interfaces of Buffer Manager.                      |
-| dt.h                   | Boolean constants.                                           |
-| __expr.*__             | Parse condition expression in the scan.                      |
-| __record_mgr.*__       | Responsible for managing tables in this database.            |
-| store_mgr.*            | Responsible for managing database in files and memory.       |
-| dberror.*              | Keeps track and report different types of error.             |
-| __rm_serializer.*__    | Responsible for serialize and deserialize data stored in files. |
-| __tables.h__           | Define useful data structures and functions to implement the record manager. |
-| __test_assign3_1.c__   | Base test cases.                                             |
-| __test_helper.h__      | Testing and assertion tools.                                 |
-| __test_expr.h__        | Testing the expression functions.                            |
+File | Description
+--- | ---
+buffer_mgr.* | Manages memory page frames and page files.
+buffer_mgr_stat.* | Statistic interfaces of Buffer Manager.
+dt.h | Boolean constants.
+__expr.*__ | Parse condition expression in the scan.
+__record_mgr.*__ | Responsible for managing tables in this database.
+store_mgr.* | Responsible for managing database in files and memory.
+dberror.* | Keeps track and report different types of error.
+__rm_serializer.*__ | Responsible for serialize and deserialize data stored in files.
+__tables.h__ | Define useful data structures and functions to implement the record manager. |
+__test_assign3_1.c__ | Base test cases.
+__test_helper.h__ | Testing and assertion tools.
+__test_expr.h__ | Testing the expression functions.
 
 ## Compiling and Running
 
-1. Enter into the folder containing all documents. `$ cd /assign3
-
-2. Execute `$ make all`
-
-3. See `test_assign3_1` results`$ ./test_assign3_1`
+1.  Enter into the folder containing all documents. `$ cd /assign3
+1.  Execute `$ make all`
+1.  See `test_assign3_1` results`$ ./test_assign3_1`
 
 ## Architectural Design
 
 ![Architecture screenshot.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign3/architecture.png)
 
-![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign3/hierarchy.png)
+![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign3/hierarchy.svg)
 
 ## Design Rationale
 
 Basically, the record manager will determine:
 
-1. How pages are organized in the file.
-2. How records are organized on each page.
-3. How each record is formatted.
-4. How to scan the record.
+1.  How pages are organized in the file.
+1.  How records are organized on each page.
+1.  How each record is formatted.
+1.  How to scan the record.
 
 ### Organize Pages in the file
 
@@ -57,25 +66,30 @@ typedef struct PageDirectory {
     int pageNum; // the index of pageNum
     int count; // how many free slots are available in this page
     int firstFreeSlot; // the location of the first free slot in this page
-	struct PageDirectory *pre;
-	struct PageDirectory *next;
+    struct PageDirectory *pre;
+    struct PageDirectory *next;
 } PageDirectory;
 ```
 
-The page directory acts as the header page and will be stored at one page. The format of serialize data of page directory is `[0002-0004-0005]` while `0002` represents `pageNum`, `0004` represents `count` and `0005` represents `firstFreeSlot`.  By doing this, we can get the `maxPageDirectories` that can be stored in a single page.
+The page directory acts as the header page and will be stored at one page. The
+format of serialize data of page directory is `[0002-0004-0005]` while `0002`
+represents `pageNum`, `0004` represents `count` and `0005` represents
+`firstFreeSlot`. By doing this, we can get the `maxPageDirectories` that can be
+stored in a single page.
 
 ```c
  maxPageDiretories = PAGE_SIZE / strlen(pdStr);
 ```
 
-Additionally, we define a `PageDirectoryCache`struct to track all page directories information.
+Additionally, we define a `PageDirectoryCache`struct to track all page
+directories information.
 
 ```c
 typedef struct PageDirectoryCache {
     int count;
     PageDirectory *front;
     PageDirectory *rear;
-}PageDirectoryCache;
+} PageDirectoryCache;
 ```
 
 We create a new `PageDirectory` when the clients create the table.
@@ -102,7 +116,8 @@ pinPage(bm, page, 1);
 PageDirectoryCache *pageDirectoryCache = deserializePageDirectories(page->data);
 ```
 
-Whenever the data pages become full, we allocate a new free data pages and the tracker will move to the next free pages.
+Whenever the data pages become full, we allocate a new free data pages and the
+tracker will move to the next free pages.
 
 ```c
 // get the page directory info
@@ -146,7 +161,9 @@ if(p == NULL) {
 }
 ```
 
-We release all page directory nodes when the clients close the table. Before we release those resources, we need to make sure that the latest `pageDirectoryCache` has been flushed to the file page.
+We release all page directory nodes when the clients close the table. Before we
+release those resources, we need to make sure that the latest
+`pageDirectoryCache` has been flushed to the file page.
 
 ```c
 // release all pageDirectory nodes
@@ -161,7 +178,9 @@ free(pageDirectoryCache);
 
 ### The Schema and Record
 
-Record types are completely determined by the relation's schema. Here, we use fixed-length records that only contain fixed-length fields. Flexible-length records with the same schema consist of the same number of bytes.
+Record types are completely determined by the relation's schema. Here, we use
+fixed-length records that only contain fixed-length fields. Flexible-length
+records with the same schema consist of the same number of bytes.
 
 When the clients create the table, we store this schema information on page 0.
 
@@ -223,11 +242,21 @@ We store record information in the file page in this format:
 
 `[0002-0001](a:0002,b:bbbb,c:0002)`.
 
-Here `[0002-0001]` represents the page number and slot, while `(a:0002, b:bbbb, c:0002)` represents the record attributes and their values. We use 4 bytes to store the integer values by defining converting functions. For example, if `a = 1`, then we store `0001`, but if `a > 9999`, then we use hexadecimal notation to store those data, ensuring that the integer value will always occupy 4 bytes.
+Here `[0002-0001]` represents the page number and slot, while
+`(a:0002, b:bbbb, c:0002)` represents the record attributes and their values. We
+use 4 bytes to store the integer values by defining converting functions. For
+example, if `a = 1`, then we store `0001`, but if `a > 9999`, then we use
+hexadecimal notation to store those data, ensuring that the integer value will
+always occupy 4 bytes.
 
 ### how records are organized on each page
 
-The records organization involves `createSchema`, `getRecord`, `insertRecord`, `updateRecord`, and `deleteRecord`. The basic idea for every function is that we create a `RecordNode` struct to store all records on the current page. The `RecordNode` is a double-linked list. We iterate through all records to check whether they are required. Once we find the target record, we can perform  `delete`, and `update` operations.
+The records organization involves `createSchema`, `getRecord`, `insertRecord`,
+`updateRecord`, and `deleteRecord`. The basic idea for every function is that we
+create a `RecordNode` struct to store all records on the current page. The
+`RecordNode` is a double-linked list. We iterate through all records to check
+whether they are required. Once we find the target record, we can perform
+`delete`, and `update` operations.
 
 ```c
 typedef struct RecordNode {
@@ -236,17 +265,17 @@ typedef struct RecordNode {
 	char *data;
 	struct RecordNode *pre;
 	struct RecordNode *next;
-}RecordNode;
+} RecordNode;
 ```
 
-When the client  executes`insert`, `update`, `delete`  commands, the `RecordNode` will track those changes and do the related changes.
+When the client  executes`insert`, `update`, `delete`  commands, the
+`RecordNode` will track those changes and do the related changes.
 
 #### insert a record
 
 ```c
 RC insertRecord (RM_TableData *rel, Record *record)
 {
-
     // check the validation of input parameters
     if(rel == NULL || record == NULL) {
         return RC_PARAMS_ERROR;
@@ -386,7 +415,12 @@ RC updateRecord (RM_TableData *rel, Record *record)
 
 #### delete a record
 
-Deleting a record is a little bit different from `insert` and `update`. Here is my idea: I find the target record and modify both its page number and slot to 0. Then, I serialize this record and store it in its original place. After that, when we update the `firstFreeSlot` in this page, I first get all records on this page and find the first record with `pageNum = 0` and `slot = 0`. This way, we can make full use of these free spaces. Here is the code.
+Deleting a record is a little bit different from `insert` and `update`. Here is
+my idea: I find the target record and modify both its page number and slot to 0.
+Then, I serialize this record and store it in its original place. After that,
+when we update the `firstFreeSlot` in this page, I first get all records on this
+page and find the first record with `pageNum = 0` and `slot = 0`. This way, we
+can make full use of these free spaces. Here is the code.
 
 ```c
 // delete a record with a certain RID
@@ -476,12 +510,13 @@ typedef struct ScanCond{
 } ScanCond;
 ```
 
-The Scan function relies on `getRecord`. First, we set the first record's page number and slot, retrieve that record from the file, and then parse this string to get the required record. Here is the code.
+The Scan function relies on `getRecord`. First, we set the first record's page
+number and slot, retrieve that record from the file, and then parse this string
+to get the required record. Here is the code.
 
 ```c
 RC next (RM_ScanHandle *scan, Record *record)
 {
-
     //record = (Record *)malloc(sizeof(Record));
     if(scan==NULL || record==NULL){
         return RC_ERROR;
@@ -541,7 +576,13 @@ RC next (RM_ScanHandle *scan, Record *record)
 
 ### Optional Extensions
 
-For this assignment, we are implementing `TIDs and tombstones`. The basic idea of tombstones is to use `MARK` in the map or old location to indicate that the data in this current position has already been deleted. Whenever the client deletes a record, we simply mark both the page number and slot occupied by this deleted record as 0. Next, when we check whether there is a free slot to store data in this page, we find this tombstone and insert the new data here. This way, we make full use of the free space in the system
+For this assignment, we are implementing `TIDs and tombstones`. The basic idea
+of tombstones is to use `MARK` in the map or old location to indicate that the
+data in this current position has already been deleted. Whenever the client
+deletes a record, we simply mark both the page number and slot occupied by this
+deleted record as 0. Next, when we check whether there is a free slot to store
+data in this page, we find this tombstone and insert the new data here. This
+way, we make full use of the free space in the system
 
 ## Testing Result
 
@@ -562,4 +603,10 @@ forcibly.
 
 ## Contribution
 
-The `assign3` had been done by **xzhang143@hawk.iit.edu (A20494478) **,  **jlee252@hawk.iit.edu (A20324557)**  and **hwijaya@hawk.iit.edu (A20529195)**. Specifically, Xue implemented most of the functions and fixed the issues raised in the process; Jessica implemented the scan functions and conducted tests. Hendra did a final test and tried to implement the `Interactive interface` (optional extensions), but finally, we decided not to merge the `Interactive interface` for the final `Makefile` in the submission.
+The `assign3` had been done by **xzhang143@hawk.iit.edu (A20494478)**,
+**jlee252@hawk.iit.edu (A20324557)** and **hwijaya@hawk.iit.edu (A20529195)**.
+Specifically, Xue implemented most of the functions and fixed the issues raised
+in the process; Jessica implemented the scan functions and conducted tests.
+Hendra did a final test and tried to implement the `Interactive interface`
+(optional extensions), but finally, we decided not to merge the
+`Interactive interface` for the final `Makefile` in the submission.

@@ -37,13 +37,13 @@ Operations on a B+ tree are faster than on a B-tree.
 The following steps are followed to search for data in a B+ Tree of order `m`.
 Let the data to be searched be `k`.
 
-1. Start from the root node. Compare `k` with the keys at the root
-  node `[k1, k2, k3,......km - 1]`.
-2. If `k < k1`, go to the left child of the root node.
-3. Else if `k == k1`, compare `k2`. If `k < k2`, `k` lies between `k1` and `k2`.
-  So, search in the left child of `k2`.
-4. If `k > k2`, go for `k3, k4,...km-1` as in steps 2 and 3.
-5. Repeat the above steps until a leaf node is reached.
+1.  Start from the root node. Compare `k` with the keys at the root node
+    `[k1, k2, k3,......km - 1]`.
+1.  If `k < k1`, go to the left child of the root node.
+1.  Else if `k == k1`, compare `k2`. If `k < k2`, `k` lies between `k1` and
+    `k2`. So, search in the left child of `k2`.
+1.  If `k > k2`, go for `k3, k4,...km-1` as in steps 2 and 3.
+1.  Repeat the above steps until a leaf node is reached.
 
 If `k` exists in the leaf node, return true else return false.
 
@@ -53,23 +53,23 @@ Let us search `k = 45` on the following B+ tree.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/search-tree.png)<br><small>B+ tree</small>
 
-**Step 1**: Compare `k` with root node.
+**Step 1:** Compare `k` with root node.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-1.png)<br><small>k is not found at the root</small>
 
-**Step 2**: Since `k > 25`, go to the right child.
+**Step 2:** Since `k > 25`, go to the right child.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-2.png)<br><small>Go to right of the foot</small>
 
-**Step 3**: Compare `k` with 35. Since `k > 30`, compare `k` with 45.
+**Step 3:** Compare `k` with 35. Since `k > 30`, compare `k` with 45.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-3.png)<br><small>k not found</small>
 
-**Step 4**: Since `k ≥ 45`, so go to the right child.
+**Step 4:** Since `k ≥ 45`, so go to the right child.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-4.png)<br><small>go to the right</small>
 
-**Step 5**: `k` is found.
+**Step 5:** `k` is found.
 
 ![](https://cdn.programiz.com/sites/tutorial2program/files/B+tree-5.png)<br><small>k is found</small>
 
@@ -659,8 +659,70 @@ public class BPlusTree {
 
 ### Time Complexity
 
-If linear search is implemented inside a node, then total complexity
-is `Θ(logt n)`.
+If linear search is implemented inside a node, then total complexity is
+
+Before going through the steps below, one must know these facts about a B+ tree
+of degree **m**.
+
+1.  A node can have a maximum of m children. (i.e. 3)
+1.  A node can contain a maximum of `m-1` keys. (i.e. 2)
+1.  A node should have a minimum of `⌈m/2⌉` children. (i.e. 2)
+1.  A node (except root node) should contain a minimum of `⌈m/2⌉ - 1` keys.
+    (i.e. 1)
+
+While deleting a key, we have to take care of the keys present in the internal
+nodes (i.e. indexes) as well because the values are redundant in a B+ tree.
+Search the key to be deleted then follow the following steps.
+
+#### Case I
+
+The key to be deleted is present only at the leaf node not in the indexes (or
+internal nodes). There are two cases for it:
+
+1.  There is more than the minimum number of keys in the node. Simply delete the
+    key.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-1-b+tree.png)<br><small>Deleting 40 from B-tree</small>
+
+1.  There is an exact minimum number of keys in the node. Delete the key and
+    borrow a key from the immediate sibling. Add the median key of the sibling
+    node to the parent.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-2-b+tree.png)<br><small>Deleting 5 from B-tree</small>
+
+#### Case II
+
+The key to be deleted is present in the internal nodes as well. Then we have to
+remove them from the internal nodes as well. There are the following cases for
+this situation.
+
+1.  If there is more than the minimum number of keys in the node, simply delete
+    the key from the leaf node and delete the key from the internal node as
+    well. Fill the empty space in the internal node with the inorder successor.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-3-b+tree_0.png)<br><small>Deleting 45 from B-tree</small>
+
+2.  If there is an exact minimum number of keys in the node, then delete the key
+    and borrow a key from its immediate sibling (through the parent). Fill the
+    empty space created in the index (internal node) with the borrowed key.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-4-b+tree_0.png)<br><small>Deleting 35 from B-tree</small>
+
+3.  This case is similar to Case II(1) but here, empty space is generated above
+    the immediate parent node. After deleting the key, merge the empty space
+    with its sibling. Fill the empty space in the grandparent node with the
+    inorder successor.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-5-b+tree_0.png)<br><small>Deleting 25 from B-tree</small>
+
+#### Case III
+
+In this case, the height of the tree gets shrinked. It is a little complicated.
+Deleting 55 from the tree below leads to this condition. It can be understood in
+the illustrations below.
+
+![](https://cdn.programiz.com/sites/tutorial2program/files/deletion-6-b+tree_0.png)<br><small>Deleting 55 from B-tree</small>
+`Θ(logt n)`.
 
 If binary search is used, then total complexity is `Θ(log2t.logt n)`.
 

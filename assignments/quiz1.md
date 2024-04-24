@@ -6,80 +6,80 @@
 
 > How many possible ways are there to represent a record?
 >
-> 1. 4
-> 2. 8
-> 3. 2
-> 4. 3
+> 1.  4
+> 1.  8
+> 1.  2
+> 1.  3
 
-**C**. 2
+**C.** 2
 
 ## Problem 2
 
 > Memory types that use ___ storage do not permanently store data.
 >
-> 1. Secondary
-> 2. Primary
-> 3. Tertiary
-> 4. Disk
+> 1.  Secondary
+> 1.  Primary
+> 1.  Tertiary
+> 1.  Disk
 
-**B**. Primary
+**B.** Primary
 
 ## Problem 3
 
 > What is the term used to describe the same track on all platters within a
   disk?
 >
-> 1. Platter
-> 2. Sector
-> 3. Cylinder
-> 4. Head
+> 1.  Platter
+> 1.  Sector
+> 1.  Cylinder
+> 1.  Head
 
-**C**. Cylinder
+**C.** Cylinder
 
 ## Problem 4
 
 > Which of the following is not a Storage Manager component?
 >
-> 1. Transaction manager
-> 2. File manager
-> 3. Buffer manager
-> 4. Logical manager
+> 1.  Transaction manager
+> 1.  File manager
+> 1.  Buffer manager
+> 1.  Logical manager
 
-**C**. Buffer manager
+**C.** Buffer manager
 
 ## Problem 5
 
 > A page that is modified but, yet to be written back to disk is said to be ___.
 >
-> 1. buffered
-> 2. pinned
-> 3. dirty
-> 4. forced
+> 1.  buffered
+> 1.  pinned
+> 1.  dirty
+> 1.  forced
 
-**C**. dirty
+**C.** dirty
 
 ## Problem 6
 
 > The file organization that allows unordered file records to be placed on disk
   without any order is known as ___.
 >
-> 1. Sequential file organization
-> 2. Clustered file organization
-> 3. Hash file organization
-> 4. Heap file organization
+> 1.  Sequential file organization
+> 1.  Clustered file organization
+> 1.  Hash file organization
+> 1.  Heap file organization
 
-**D**. Heap file organization
+**D.** Heap file organization
 
 ## Problem 7
 
 > The ___ is used as an index to the page table.
 >
-> 1. Page id
-> 2. Frame bit
-> 3. Page offset
-> 4. Pin counter
+> 1.  Page id
+> 1.  Frame bit
+> 1.  Page offset
+> 1.  Pin counter
 
-**A**. Page id
+**A.** Page id
 
 ## Problem 8
 
@@ -89,12 +89,12 @@
   average seek time of 10 ms. Which of the following combination is the right i)
   capacity ii) rotational latency of the hard drive?
 >
-> 1. 1 GB and 2.17 ms
-> 2. 4 GB and 5.17 ms
-> 3. 3 GB and 4.17 ms
-> 4. 2 GB and 3.17 ms
+> 1.  1 GB and 2.17 ms
+> 1.  4 GB and 5.17 ms
+> 1.  3 GB and 4.17 ms
+> 1.  2 GB and 3.17 ms
 
-**C**. 3 GB and 4.17 ms
+**C.** 3 GB and 4.17 ms
 
 ## Problem 9
 
@@ -102,20 +102,20 @@
   track. A block may be of several KBs in size. Which of the following is the
   valid block size?
 >
-> 1. 512 bytes
-> 2. 1024 bytes
-> 3. 2048 bytes
-> 4. 26624 bytes
+> 1.  512 bytes
+> 1.  1024 bytes
+> 1.  2048 bytes
+> 1.  26624 bytes
 
-**C**. 2048 bytes
+**C.** 2048 bytes
 
 ## Problem 10
 
 > The frequently used buffer replacement strategy is ___?
 >
-> 1. Clock
-> 2. Least recently used (LRU)
-> 3. Most recently used (MRU)
-> 4. Sequential flooding
+> 1.  Clock
+> 1.  Least recently used (LRU)
+> 1.  Most recently used (MRU)
+> 1.  Sequential flooding
 
-**B**. Least recently used (LRU)
+**B.** Least recently used (LRU)
