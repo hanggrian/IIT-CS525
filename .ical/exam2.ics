@@ -28,7 +28,7 @@ UID:IIT-CS525-exam2
 DTSTART;TZID=America/Chicago:20230804T130000
 DTEND;TZID=America/Chicago:20230804T150000
 SUMMARY:CS525 - Final exam
-DESCRIPTION:https://github.com/hendraanggrian/IIT-CS525/
+DESCRIPTION:https://github.com/hanggrian/IIT-CS525/
 LOCATION:Stuart Building 111
 BEGIN:VALARM
 ACTION:DISPLAY

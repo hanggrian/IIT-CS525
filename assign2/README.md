@@ -71,9 +71,9 @@ This is free software; see the source for copying conditions.  There is NO
 
 ## Architectural Design
 
-![Architecture screenshot.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign2/architecture.png)
+![Architecture screenshot.](https://github.com/hanggrian/IIT-CS525/raw/assets/assign2/architecture.png)
 
-![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign2/hierarchy.svg)
+![Execution hierarchy.](https://github.com/hanggrian/IIT-CS525/raw/assets/assign2/hierarchy.svg)
 
 ## Design Rationale
 

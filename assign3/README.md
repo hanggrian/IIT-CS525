@@ -44,9 +44,9 @@ __test_expr.h__ | Testing the expression functions.
 
 ## Architectural Design
 
-![Architecture screenshot.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign3/architecture.png)
+![Architecture screenshot.](https://github.com/hanggrian/IIT-CS525/raw/assets/assign3/architecture.png)
 
-![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign3/hierarchy.svg)
+![Execution hierarchy.](https://github.com/hanggrian/IIT-CS525/raw/assets/assign3/hierarchy.svg)
 
 ## Design Rationale
 
@@ -595,7 +595,7 @@ Our implementations passed all testcases listed in `test_assign3_1` .
 
 ## Interactive Interface
 
-![Interactive screenshot.](https://raw.githubusercontent.com/hendraanggrian/IIT-CS525/assets/assign3/interactive.png)
+![Interactive screenshot.](https://raw.githubusercontent.com/hanggrian/IIT-CS525/assets/assign3/interactive.png)
 
 Our interactive interface is a simple command-line app that organizes a student
 database. The process is self-repeating until the user exists promptly or

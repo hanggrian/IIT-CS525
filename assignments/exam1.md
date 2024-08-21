@@ -148,19 +148,19 @@ HAVING COUNT(P.PID) <= 1;
 
 Inserting 4:
 
-![Inserted 4.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_1.jpg)
+![Inserted 4.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_1.jpg)
 
 Inserting 6:
 
-![Inserted 6.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_2.jpg)
+![Inserted 6.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_2.jpg)
 
 Inserting 8:
 
-![Inserted 8.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_3.jpg)
+![Inserted 8.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_3.jpg)
 
 Inserting 10:
 
-![Inserted 10.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_4.jpg)
+![Inserted 10.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree1_4.jpg)
 
 ## B+-tree problem 2
 
@@ -168,12 +168,12 @@ Inserting 10:
 
 Deleting 13:
 
-![Deleted 13.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_1.jpg)
+![Deleted 13.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_1.jpg)
 
 Deleting 15:
 
-![Deleted 15.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_2.jpg)
+![Deleted 15.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_2.jpg)
 
 Deleting 1:
 
-![Deleted 1.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_3.jpg)
+![Deleted 1.](https://github.com/hanggrian/IIT-CS525/raw/assets/assignments/exam1_bptree2_3.jpg)

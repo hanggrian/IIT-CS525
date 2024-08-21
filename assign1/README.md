@@ -43,7 +43,7 @@ This is free software; see the source for copying conditions.  There is NO
 
 ## Hierarchy
 
-![Execution hierarchy.](https://github.com/hendraanggrian/IIT-CS525/raw/assets/assign1/hierarchy.svg)
+![Execution hierarchy.](https://github.com/hanggrian/IIT-CS525/raw/assets/assign1/hierarchy.svg)
 
 ## Implementation of interfaces
 
